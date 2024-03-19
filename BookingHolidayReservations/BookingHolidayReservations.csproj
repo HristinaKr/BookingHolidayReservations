@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.20" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BookingHolidayReservations.Core\BookingHolidayReservations.Core.csproj" />
+  </ItemGroup>
+
 </Project>

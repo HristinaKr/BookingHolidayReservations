@@ -1,4 +1,4 @@
-﻿using BookingHolidayReservations.Data;
+﻿using BookingHolidayReservations.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
