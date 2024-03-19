@@ -26,5 +26,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
         [MaxLength(PasswordMaxLength)]
         public string Password { get; set; } = string.Empty;
 
+        public List<Booking> Bookings { get; set; } = new List<Booking>();
+
     }
 }

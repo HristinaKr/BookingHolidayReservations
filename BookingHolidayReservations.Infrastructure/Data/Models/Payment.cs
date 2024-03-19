@@ -18,6 +18,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
         public int BookingId { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal TotalAmount { get; set; }
 
         [Required]

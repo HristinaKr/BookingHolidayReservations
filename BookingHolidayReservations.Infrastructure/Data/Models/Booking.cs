@@ -31,5 +31,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
         public User User { get; set; } = null!;
 
         public List<HolidayDestination> Destination { get; set; } = new List<HolidayDestination>();
+      
+        public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }
