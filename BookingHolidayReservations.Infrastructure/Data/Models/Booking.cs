@@ -27,6 +27,9 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
         [MaxLength(GuestsMaxCount)]
         public int NumberOfGuests { get; set; }
 
+        [Required]
+        public bool IsConfirmed { get; set; }
+
         [ForeignKey(nameof(UserId))]
         public User User { get; set; } = null!;
 
