@@ -1,7 +1,7 @@
 ﻿using BookingHolidayReservations.Infrastructure.Data.Models;
+using BookingHolidayReservations.Infrastructure.Data.SeedDatabase;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace BookingHolidayReservations.Infrastructure.Data
 {
@@ -14,6 +14,12 @@ namespace BookingHolidayReservations.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new BookingConfiguration());
+            builder.ApplyConfiguration(new HolidayDestinationConfiguration());
+            builder.ApplyConfiguration(new PaymentConfig());
+            builder.ApplyConfiguration(new AdminConfiguration());
+            builder.ApplyConfiguration(new UsersConfig());
+
             builder.Entity<Booking>()
                 .HasOne(b => b.User)
                 .WithMany(u => u.Bookings)
@@ -35,6 +41,6 @@ namespace BookingHolidayReservations.Infrastructure.Data
         public DbSet<Booking> Bookings { get; set; } = null!;
         public DbSet<HolidayDestination> HolidayDestinations { get; set; } = null!;
         public DbSet<Payment> Payments { get; set; } = null!;
-        public DbSet<Admin> Admins { get; set; } = null!;
+        public DbSet<Administrator> Admins { get; set; } = null!;
     }
 }
