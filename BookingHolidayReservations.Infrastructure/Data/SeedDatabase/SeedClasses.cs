@@ -134,6 +134,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
             PayInformation = new Payment()
             {
                 Id = 1,
+                BookingId = 2,
             };
         }
     }
