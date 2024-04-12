@@ -1,17 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BookingHolidayReservations.Infrastructure.Constants.ConstantsValidation;
 namespace BookingHolidayReservations.Infrastructure.Data.Models
 {
     [Comment("User profile")]
-    public class User
+    public class UsersProfile
     {
         [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -24,7 +20,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
 
         [Required]
         [MaxLength(PasswordMaxLength)]
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; set; } = null!;
 
         public List<Booking> Bookings { get; set; } = new List<Booking>();
 

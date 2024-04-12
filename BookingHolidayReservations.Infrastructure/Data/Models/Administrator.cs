@@ -5,9 +5,10 @@ using static BookingHolidayReservations.Infrastructure.Constants.ConstantsValida
 namespace BookingHolidayReservations.Infrastructure.Data.Models
 {
     [Comment("Admin functions")]
-    public class Admin
+    public class Administrator
     {
         [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required]

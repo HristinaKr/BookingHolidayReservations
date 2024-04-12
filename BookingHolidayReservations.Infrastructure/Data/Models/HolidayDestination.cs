@@ -9,6 +9,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
     public class HolidayDestination
     {
         [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required]

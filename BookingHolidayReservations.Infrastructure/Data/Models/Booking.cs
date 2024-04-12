@@ -9,6 +9,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
     public class Booking
     {
         [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -31,7 +32,7 @@ namespace BookingHolidayReservations.Infrastructure.Data.Models
         public bool IsConfirmed { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public User User { get; set; } = null!;
+        public UsersProfile User { get; set; } = null!;
 
         public List<HolidayDestination> Destination { get; set; } = new List<HolidayDestination>();
       
