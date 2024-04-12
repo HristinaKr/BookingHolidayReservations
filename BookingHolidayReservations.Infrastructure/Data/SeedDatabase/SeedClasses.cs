@@ -1,22 +1,23 @@
 ﻿using BookingHolidayReservations.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
 {
     internal class SeedClasses
     {
-        public User Person { get; set; }
-        public User Guest { get; set; }
-        public Administrator Admin { get; set; }
-        public Booking HolidayBooking { get; set; }
-        public HolidayDestination BeachResort { get; set; }
-        public HolidayDestination ThroughTheOceanCruise { get; set; }
-        public HolidayDestination Mountain { get; set; }
-        public HolidayDestination HistoricTown { get; set; }
-        public HolidayDestination Wellness { get; set; }
-        public Payment PayInformation { get; set; }
+        public UsersProfile Person { get; set; } = null!;   
+        public UsersProfile Guest { get; set; } = null!;
+        public Administrator Admin { get; set; } = null!;
+        public Booking HolidayBooking { get; set; } = null!;
+        public HolidayDestination BeachResort { get; set; } = null!;
+        public HolidayDestination ThroughTheOceanCruise { get; set; } = null!;
+        public HolidayDestination Mountain { get; set; } = null!;
+        public HolidayDestination HistoricTown { get; set; } = null!;
+        public HolidayDestination Wellness { get; set; } = null!;
+        public Payment PayInformation { get; set; } = null!;
 
 
-        public SeedClasses() 
+        public SeedClasses()
         {
             SeedUsers();
             SeedAdmin();
@@ -26,27 +27,27 @@ namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
         }
         private void SeedUsers()
         {
-           // var hasher = new PasswordHasher<User>();
+            //var hasher = new PasswordHasher<ApplicationUsers>();
 
-            Person = new User()
+            Person = new UsersProfile()
             {
-                Id = '1' ,
-                Username = "user11",
+                Id = '1',
+               Username = "user11",
                 Email = "user@gmail.com",
-                Password = "Password",
+               Password = "Password",
 
             };
-           // Person.PasswordHash = hasher.HashPassword(Person, "person999");
+            //Person.PasswordHash = hasher.HashPassword(Person, "person999");
 
-            Guest = new User()
+            Guest = new UsersProfile()
             {
                 Id = '2',
-                Username = "guest3",
+               Username = "guest3",
                 Email = "guest@gmail.com",
                 Password = "Password2",
 
             };
-           // Guest.PasswordHash = hasher.HashPassword(Guest, "guest111");
+            //Guest.PasswordHash = hasher.HashPassword(Guest, "guest111");
 
         }
 
@@ -54,29 +55,29 @@ namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
         {
             Admin = new Administrator()
             {
-            
-                    Id = 1,
-                    Username = "admin2024",
-                    Email = "admin2024@example.com",
-                    Password = "adminpassword2",
-                    FullName = "Admin Two",
-                    PhoneNumber = "0987654321",
-                    Address = "456 Admin Avenue, Admin Town"
+
+                Id = 1,
+                Username = "admin2024",
+                Email = "admin2024@example.com",
+                Password = "adminpassword2",
+                FullName = "Admin Two",
+                PhoneNumber = "0987654321",
+                Address = "456 Admin Avenue, Admin Town"
             };
 
         }
 
-        private void SeedBooking() 
+        private void SeedBooking()
         {
             HolidayBooking = new Booking()
             {
                 Id = 1,
-                
+
 
             };
         }
 
-        private void SeedHolidayDestination() 
+        private void SeedHolidayDestination()
         {
             BeachResort = new HolidayDestination()
             {
@@ -131,11 +132,53 @@ namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
 
         private void SeedPayInformation()
         {
-            PayInformation = new Payment()
+            var payment = new List<Payment>()
             {
-                Id = 1,
-                BookingId = 2,
+                new Payment
+                {
+                    Id = 1,
+                    BookingId = 1,
+                    TotalAmount = 2000.33m,
+                    PaymentDate = DateTime.Now,
+                  
+
+                },
+
+                new Payment()
+                {
+                    Id = 2,
+                   BookingId = 2,
+                    TotalAmount = 14000.33m,
+                    PaymentDate = DateTime.Now
+                },
+
+                new Payment()
+                {
+                    Id = 3,
+                    BookingId = 3,
+                    TotalAmount = 4000.33m,
+                    PaymentDate = DateTime.Now
+                },
+
+                new Payment()
+                {
+                    Id = 4,
+                    BookingId = 4,
+                    TotalAmount = 1500.55m,
+                    PaymentDate = DateTime.Now
+                },
+
+                new Payment()
+                {
+                    Id = 5,
+                    BookingId = 5,
+                    TotalAmount = 3000.00m,
+                    PaymentDate = DateTime.Now
+                }
+
+
             };
+          
         }
     }
 }

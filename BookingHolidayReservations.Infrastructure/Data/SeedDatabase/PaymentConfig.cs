@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using BookingHolidayReservations.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookingHolidayReservations.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
 {
@@ -15,7 +10,12 @@ namespace BookingHolidayReservations.Infrastructure.Data.SeedDatabase
         {
             var data = new SeedClasses();
 
-            builder.HasData(new Payment[] { data.PayInformation });
+            if (data.PayInformation != null)
+            {
+                builder.HasData(new Payment[] { data.PayInformation });
+            }
+
+          //  builder.HasData(new Payment[] { data.PayInformation });
         }
     }
 }
