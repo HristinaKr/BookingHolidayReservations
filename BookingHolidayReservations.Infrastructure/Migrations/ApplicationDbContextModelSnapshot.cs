@@ -37,7 +37,7 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("BookingHolidayDestination");
                 });
 
-            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.Admin", b =>
+            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.Administrator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,6 +80,18 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("Admins");
 
                     b.HasComment("Admin functions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "456 Admin Avenue, Admin Town",
+                            Email = "admin2024@example.com",
+                            FullName = "Admin Two",
+                            Password = "adminpassword2",
+                            PhoneNumber = "0987654321",
+                            Username = "admin2024"
+                        });
                 });
 
             modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.Booking", b =>
@@ -99,6 +111,9 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.Property<int>("DestinationId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("NumberOfGuests")
                         .HasMaxLength(50)
                         .HasColumnType("int");
@@ -113,6 +128,18 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("Bookings");
 
                     b.HasComment("Holiday bookings made by the user");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CheckInDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOutDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DestinationId = 0,
+                            IsConfirmed = false,
+                            NumberOfGuests = 0,
+                            UserId = 0
+                        });
                 });
 
             modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.HolidayDestination", b =>
@@ -145,6 +172,48 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("HolidayDestinations");
 
                     b.HasComment("Destination description");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Experience beachside bliss at our resort.Relax and enjoy endless ocean views.",
+                            ImageUrl = "https://dieltours.eu/wp-content/uploads/2023/10/IMG.jpg",
+                            Name = "Lovely beach resorts",
+                            PricePerPackage = 2000.33m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Embark on an unforgettable journey across the open seas.",
+                            ImageUrl = "https://blue-seas.eu/wp-content/uploads/2020/03/msc_Okolosvetski_kruiz22.jpg",
+                            Name = "Sail through the ocean's beauty",
+                            PricePerPackage = 14000.33m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Embrace the stunning views and adrenaline rush of skiing in the mountains.",
+                            ImageUrl = "https://assets.vogue.com/photos/657ca3f8e3823f5dc8d413a8/master/w_1600%2Cc_limit/Snowmass%2C%2520Colorado_GettyImages-1135607220.jpg",
+                            Name = "Experience the thrill of skiing down majestic mountain slope",
+                            PricePerPackage = 4000.33m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Discover the allure of our quaint historic town, where every cobblestone street tells a story.",
+                            ImageUrl = "https://www.simpsontravel.com/media/12571/historic.jpg?anchor=center&mode=crop&quality=80&width=1200&height=800&rnd=131262030845070000",
+                            Name = "Step back in time and immerse yourself in the rich history of our charming historic town",
+                            PricePerPackage = 1500.55m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Escape to tranquility with our wellness retreat.",
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSakpmgH9ZmFUN1XfyjyPvY2HVI5lelyJC_HQ&usqp=CAU",
+                            Name = "Indulge in a wellness getaway",
+                            PricePerPackage = 3000.00m
+                        });
                 });
 
             modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.Payment", b =>
@@ -172,7 +241,7 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.User", b =>
+            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.UsersProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,6 +269,22 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.ToTable("ApplicationUsers");
 
                     b.HasComment("User profile");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 49,
+                            Email = "user@gmail.com",
+                            Password = "Password",
+                            Username = "user11"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Email = "guest@gmail.com",
+                            Password = "Password2",
+                            Username = "guest3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -421,7 +506,7 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
 
             modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.Booking", b =>
                 {
-                    b.HasOne("BookingHolidayReservations.Infrastructure.Data.Models.User", "User")
+                    b.HasOne("BookingHolidayReservations.Infrastructure.Data.Models.UsersProfile", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -497,7 +582,7 @@ namespace BookingHolidayReservations.Infrastructure.Migrations
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.User", b =>
+            modelBuilder.Entity("BookingHolidayReservations.Infrastructure.Data.Models.UsersProfile", b =>
                 {
                     b.Navigation("Bookings");
                 });
