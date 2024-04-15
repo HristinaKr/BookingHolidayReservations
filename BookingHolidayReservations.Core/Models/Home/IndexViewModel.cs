@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookingHolidayReservations.Core.Models.Home
+﻿namespace BookingHolidayReservations.Core.Models.Home
 {
-    public class IndexViewModel
+	public class IndexViewModel
     {
     }
 }
