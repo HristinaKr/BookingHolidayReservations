@@ -1,6 +1,12 @@
+using BookingHolidayReservations.Core.Contracts;
+using BookingHolidayReservations.Core.Services;
+using BookingHolidayReservations.Infrastructure.Data.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddApplicationIdentity(builder.Configuration);
+builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IHolidaysService, HolidaysService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews();
@@ -18,6 +24,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -23,6 +23,7 @@ namespace BookingHolidayReservations.Controllers
 			{
 				return BadRequest(); 
 			}
+
 			var model = new BecomeAgentModel();
 			return View(model);
 		}

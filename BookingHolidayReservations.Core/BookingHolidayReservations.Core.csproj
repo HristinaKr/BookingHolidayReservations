@@ -15,7 +15,6 @@
     <Folder Include="Contracts\Home\" />
     <Folder Include="Contracts\Payment\" />
     <Folder Include="Contracts\Users\" />
-    <Folder Include="Models\Agent\" />
     <Folder Include="Models\Holidays\" />
     <Folder Include="Models\Payment\" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using static BookingHolidayReservations.Infrastructure.Constants.ConstantsValida
 
 namespace BookingHolidayReservations.Infrastructure.Data.Models
 {
+    [Index(nameof(PhoneNumber), IsUnique = true)]
     [Comment("Admin functions")]
     public class Administrator
     {

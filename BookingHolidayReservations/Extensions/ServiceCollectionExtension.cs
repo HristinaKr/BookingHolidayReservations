@@ -1,4 +1,7 @@
-﻿using BookingHolidayReservations.Infrastructure.Data;
+﻿using BookingHolidayReservations.Core.Contracts;
+using BookingHolidayReservations.Core.Services;
+using BookingHolidayReservations.Infrastructure.Data;
+using BookingHolidayReservations.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +11,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IHolidaysService, HolidaysService>();
+            services.AddScoped<IAgentService, AgentService>();
+
             return services;
         }
 
@@ -17,6 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            services.AddScoped<IRepository, Repository>();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
@@ -24,7 +32,14 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                })
                       .AddEntityFrameworkStores<ApplicationDbContext>(); 
 
             return services;
