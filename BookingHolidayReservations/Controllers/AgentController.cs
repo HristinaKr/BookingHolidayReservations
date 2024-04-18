@@ -1,12 +1,12 @@
 ﻿using BookingHolidayReservations.Core.Contracts;
 using BookingHolidayReservations.Core.Models.Agent;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BookingHolidayReservations.Controllers
 {
 
-	public class AgentController : BaseController
+    public class AgentController : BaseController
 	{
 		private readonly IAgentService agentService;
 
@@ -19,13 +19,17 @@ namespace BookingHolidayReservations.Controllers
 		
 		public async Task<IActionResult> BecomeAgent()
 		{
+			if(await agentService.ExistsById(User.Id()))
+			{
+				return BadRequest(); 
+			}
 			var model = new BecomeAgentModel();
 			return View(model);
 		}
 
 		[HttpPost]
 
-		public async Task<IActionResult> Become(BecomeAgentModel model)
+		public async Task<IActionResult> BecomeAgent(BecomeAgentModel model)
 		{
 			return RedirectToAction(nameof(HolidaysController.All), "Holiday");
 		}
