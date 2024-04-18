@@ -13,9 +13,14 @@ namespace BookingHolidayReservations.Core.Services
                 repository = _repository;   
         }
 
-        public Task CreateAsync(string userId, string phoneNumber)
+        public async Task CreateAsync(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            await repository.AddAsync(new Administrator()
+            {
+                Username = userId,
+                PhoneNumber = phoneNumber,
+            });
+            await repository.SaveChangesAsync();    
         }
 
         public async Task<bool> ExistsById(string userId)
@@ -29,14 +34,16 @@ namespace BookingHolidayReservations.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> UserHasRentsAsync(string userId)
+        public async Task<bool> UserHasRentsAsync(string userId)
         {
-            throw new NotImplementedException();
+           return await repository.AllReadOnly<HolidayDestination>()
+                .AnyAsync(h => h.Id.ToString() == userId);
         }
 
-        public Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadOnly<Administrator>()
+                .AllAsync(a => a.PhoneNumber == phoneNumber);
         }
     }
 }
